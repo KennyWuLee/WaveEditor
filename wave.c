@@ -185,7 +185,7 @@ short* speed(short* array, int length, double factor)
 	if(! speed)
 	{
 		fprintf(stderr, "Program out of memory\n");
-		return 2;
+		exit(2);
 	}
 	int i;
 	//This loop sets the ith value in speed to the i*factor value in array
@@ -231,7 +231,7 @@ void fadeOut(short* array, int length, double rate)
 		//This loop scales each element so that it becomes smaller
 		for(i = 0; i < length; i++)
 		{
-			array[i] =  (short)(array[i] * (1.0 - (j/length)) * (1 - (j/length)));
+			array[i] =  (short)(array[i] * (1.0 - (j/k)) * (1 - (j/k)));
 			j++;
 		}
 	}
@@ -263,7 +263,7 @@ void fadeIn(short* array, int length, double rate)
 	{	//This loop scales each element so that it becomes larger
 		for(i = 0; i < length; i++)
 		{
-			array[i] =  (short)(array[i] * (j/length) * (j/length));
+			array[i] =  (short)(array[i] * (j/k) * (j/k));
 			j++;
 		}
 	}
@@ -319,7 +319,7 @@ short* echo(short* array, int length, double delay, double factor)
 	if(! temp)
 	{
 		fprintf(stderr, "Program out of memory\n");
-		return 2;
+		exit(2);
 	}
 	//copy the original data from array int temp
 	int i;
