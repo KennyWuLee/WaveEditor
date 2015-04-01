@@ -554,3 +554,24 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+
+short* echo(short* array, int length, double delay, double factor)
+{
+	int newLength = length + (int)(44100 * delay);
+	short* temp = (short*) malloc(sizeof(short)*newLength);
+	int i;
+	for (i = 0; i < length; ++i)
+		temp[i] = array[i];
+	int j;
+	for(i = (int)(44100 * delay), j = 0; i < newLength; ++i, ++j)
+	{
+		int sum = (temp[i] + (array[j] * factor));
+		if(sum > SHRT_MAX)
+			sum = SHRT_MAX;
+		if(sum < SHRT_MIN)
+			sum = SHRT_MIN;
+		temp[i] = sum;
+	}
+	free(array);
+	return temp;
+}
